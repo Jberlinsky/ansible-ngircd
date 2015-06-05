@@ -1,0 +1,3 @@
+---
+- apt: name=ssl-cert
+- apt: name=ngircd

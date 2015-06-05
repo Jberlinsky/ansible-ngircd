@@ -1,0 +1,24 @@
+---
+# defaults file for znzj.ngircd
+ngircd_hostname: "ngircd.example.net"
+# [Global]
+ngircd_network_name: "irc.example.net"
+ngircd_admin_info1: "Debian User"
+ngircd_admin_info2: "Debian City"
+ngircd_admin_email: "irc@irc.example.com"
+ngircd_info: "Yet another IRC Server running on Debian GNU/Linux"
+ngircd_listen: no
+ngircd_password: no
+ngircd_ports: no
+ngircd_server_gid: "irc"
+ngircd_server_uid: "irc"
+# [Limits]
+ngircd_max_nick_length: no
+# [SSL]
+#ngircd_ssl_cert_file: no
+#ngircd_ssl_dh_file: no
+#ngircd_ssl_key_file: no
+ngircd_ssl_ports: no
+# role only
+#ngircd_ssl_csr_file: no
+ngircd_ssl_csr_subj: "/CN={{ ngircd_hostname }}"

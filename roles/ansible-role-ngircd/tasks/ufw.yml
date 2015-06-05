@@ -1,0 +1,3 @@
+---
+# ufw limit 6697/tcp
+- ufw: rule=limit to_port=6697 proto=tcp

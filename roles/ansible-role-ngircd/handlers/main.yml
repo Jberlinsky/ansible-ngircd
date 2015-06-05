@@ -1,0 +1,6 @@
+---
+- name: restart ngircd
+  service: name=ngircd state=restarted
+
+- name: stop rsyslog
+  service: name=rsyslog state=stopped

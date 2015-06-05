@@ -1,0 +1,2 @@
+[ircd]
+ircd ansible_ssh_host=54.88.14.184

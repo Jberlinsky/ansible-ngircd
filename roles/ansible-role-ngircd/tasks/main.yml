@@ -1,0 +1,6 @@
+---
+# tasks file for znzj.ngircd
+- include: packages.yml tags=ngircd-packages
+- include: config.yml tags=ngircd-config
+# ufw since 1.6
+- include: ufw.yml tags=ngircd-ufw

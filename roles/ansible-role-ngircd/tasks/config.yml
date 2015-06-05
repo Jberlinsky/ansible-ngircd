@@ -1,0 +1,49 @@
+---
+- template: src=ngircd.conf.j2 dest=/etc/ngircd/ngircd.conf owner=root group=irc mode=0640
+  notify: restart ngircd
+
+# DHFile
+- name: creates {{ ngircd_ssl_dh_file }}
+  args:
+    creates: "{{ ngircd_ssl_dh_file }}"
+  shell: |
+    set -e
+    umask 027
+    openssl dhparam -out {{ ngircd_ssl_dh_file }} 2048
+  notify: restart ngircd
+- file: path={{ ngircd_ssl_dh_file }} owner=root group={{ ngircd_server_gid }} mode=0640
+  notify: restart ngircd
+
+# allow irc user to access /etc/ssl/private
+- user: name={{ ngircd_server_uid }} groups=ssl-cert
+  notify: restart ngircd
+
+- name: creates {{ ngircd_ssl_key_file }}
+  args:
+    creates: "{{ ngircd_ssl_key_file }}"
+  shell: |
+    set -e
+    umask 027
+    openssl genrsa -out {{ ngircd_ssl_key_file }} 4096
+  notify: restart ngircd
+- file: path={{ ngircd_ssl_key_file }} owner=root group={{ ngircd_server_gid }} mode=0640
+  notify: restart ngircd
+
+- name: creates {{ ngircd_ssl_csr_file }}
+  args:
+    creates: "{{ ngircd_ssl_csr_file }}"
+  shell: |
+    set -e
+    umask 022
+    openssl req -new -key {{ ngircd_ssl_key_file }} -out {{ ngircd_ssl_csr_file }} -batch -subj {{ ngircd_ssl_csr_subj }}
+
+- name: creates {{ ngircd_ssl_cert_file }} (self signed)
+  args:
+    creates: "{{ ngircd_ssl_cert_file }}"
+  shell: |
+    set -e
+    umask 022
+    openssl x509 -days 3650 -req -signkey {{ ngircd_ssl_key_file }} -in {{ ngircd_ssl_csr_file }} -out {{ ngircd_ssl_cert_file }}
+  notify:
+    - restart ngircd
+    - stop rsyslog

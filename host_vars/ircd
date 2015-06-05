@@ -1,0 +1,21 @@
+---
+ngircd_hostname: "10.64.254.7"
+# [Global]
+ngircd_network_name: "10.64.254.7"
+ngircd_admin_info1: "Local User"
+ngircd_admin_info2: "Local City"
+ngircd_admin_email: "irc@local-irc.example.com"
+ngircd_info: "Yet another IRC Server running on localhost"
+ngircd_listen: no
+ngircd_password: "nadokapass"
+ngircd_ports: no
+# [Limits]
+ngircd_max_nick_length: 18
+# [SSL]
+ngircd_ssl_cert_file: "/etc/ssl/certs/{{ ngircd_hostname }}.crt"
+ngircd_ssl_dh_file: "/etc/ngircd/dhparams.pem"
+ngircd_ssl_key_file: "/etc/ssl/private/{{ ngircd_hostname }}.key"
+ngircd_ssl_ports: 6697
+# role only
+ngircd_ssl_csr_file: "/etc/ssl/{{ ngircd_hostname }}.csr"
+ngircd_ssl_csr_subj: "/CN={{ ngircd_hostname }}"

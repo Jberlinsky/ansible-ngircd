@@ -1,0 +1,24 @@
+---
+galaxy_info:
+  author: Kazuhiro NISHIYAMA
+  description: Install ngircd and generate self-signed certificate
+  license: MIT
+  min_ansible_version: 1.2
+
+  platforms:
+  - name: Ubuntu
+    versions:
+    - precise
+    - quantal
+    - raring
+    - saucy
+    - trusty
+  - name: Debian
+    versions:
+    - squeeze
+    - wheezy
+
+  categories:
+  - networking
+
+dependencies: []
